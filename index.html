@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Image Editor</title>
+    <style>
+        body {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #e85b03;
+            border-radius: 5px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #171212;
+        }
+
+        input[type="file"] {
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 50px;
+        }
+
+        .input-field {
+            margin-bottom: 20px;
+        }
+
+        .image-preview {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="input-field">
+            <label for="name">Name:</label>
+            <input type="text" id="name" />
+        </div>
+        <div class="input-field">
+            <label for="image">Image:</label>
+            <input type="file" id="image" accept="image/*" />
+        </div>
+        <button onclick="editImage()">Edit Image</button>
+        <a id="download-link" href="#" download="edited_image.png">Download Edited Image</a>
+        <div class="image-preview">
+            <img id="preview" src="" alt="Preview" />
+        </div>
+
+    </div>
+
+
+    <script>
+        function editImage() {
+            const name = document.getElementById('name').value;
+            const image = document.getElementById('image').files[0];
+            const reader = new FileReader();
+
+            reader.onload = function (event) {
+                const img = new Image();
+                img.onload = function () {
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    ctx.drawImage(img, 0, 0);
+                    ctx.font = '30px Arial';
+                    ctx.fillStyle = 'black';
+                    ctx.fillText(name, 340, 390);
+                    const editedImage = canvas.toDataURL('image/png');
+                    document.getElementById('preview').src = editedImage;
+                    document.getElementById('download-link').href = editedImage;
+                };
+                img.src = event.target.result;
+            };
+
+            reader.readAsDataURL(image);
+        }
+    </script>
+
+</body>
+</html>
+
+</html>
+
