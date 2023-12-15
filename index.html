@@ -12,6 +12,12 @@
             border-radius: 5px;
         }
 
+        .preview-image {
+            width: 400px;
+            height: 400px;
+        }
+
+
         input[type="text"] {
             width: 100%;
             padding: 10px;
@@ -63,7 +69,7 @@
         <button onclick="editImage()">Edit Image</button>
         <a id="download-link" href="#" download="edited_image.png">Download Edited Image</a>
         <div class="image-preview">
-            <img id="preview" src="" alt="Preview" />
+            <img class="preview-image" id="preview" src="" alt="Preview" />
         </div>
 
     </div>
@@ -85,7 +91,7 @@
                     ctx.drawImage(img, 0, 0);
                     ctx.font = '30px Arial';
                     ctx.fillStyle = 'black';
-                    ctx.fillText(name, 260, 320);
+                    ctx.fillText(name, 260, 310);
                     const editedImage = canvas.toDataURL('image/png');
                     document.getElementById('preview').src = editedImage;
                     document.getElementById('download-link').href = editedImage;
@@ -98,7 +104,5 @@
     </script>
 
 </body>
-
-</html>
 
 </html>
