@@ -56,7 +56,6 @@
 </head>
 
 <body>
-
     <div class="container">
         <div class="input-field">
             <label for="name">Name:</label>
@@ -71,30 +70,28 @@
         <div class="image-preview">
             <img class="preview-image" id="preview" src="" alt="Preview" />
         </div>
-
     </div>
-
 
     <script>
         function editImage() {
-            const name = document.getElementById('name').value;
-            const image = document.getElementById('image').files[0];
+            const name = document.getElementById("name").value;
+            const image = document.getElementById("image").files[0];
             const reader = new FileReader();
 
             reader.onload = function (event) {
                 const img = new Image();
                 img.onload = function () {
-                    const canvas = document.createElement('canvas');
-                    const ctx = canvas.getContext('2d');
+                    const canvas = document.createElement("canvas");
+                    const ctx = canvas.getContext("2d");
                     canvas.width = img.width;
                     canvas.height = img.height;
                     ctx.drawImage(img, 0, 0);
-                    ctx.font = '30px Arial';
-                    ctx.fillStyle = 'black';
+                    ctx.font = "30px Arial";
+                    ctx.fillStyle = "black";
                     ctx.fillText(name, 270, 320);
-                    const editedImage = canvas.toDataURL('image/png');
-                    document.getElementById('preview').src = editedImage;
-                    document.getElementById('download-link').href = editedImage;
+                    const editedImage = canvas.toDataURL("image/png");
+                    document.getElementById("preview").src = editedImage;
+                    document.getElementById("download-link").href = editedImage;
                 };
                 img.src = event.target.result;
             };
